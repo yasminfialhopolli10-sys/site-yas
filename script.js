@@ -471,3 +471,4 @@ document.querySelectorAll("[data-category]").forEach(button => {
 document.querySelector('[data-category="Todas"]').classList.add("active");
 
 showRecipes();
+
