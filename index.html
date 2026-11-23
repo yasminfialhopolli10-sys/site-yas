@@ -2,91 +2,51 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#f8cbd5">
-
-    <title>Doces Encantados 🍰</title>
-
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffdce9">
+  <title>Doce Encanto</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+  <header class="topo">
+    <a class="logo" href="#">🍰 Doce Encanto</a>
+    <p>Receitas feitas com carinho e açúcar!</p>
+  </header>
 
-    <header class="header">
-        <div class="logo">🍰 Doces Encantados</div>
-        <p>Um mundo mágico de receitas deliciosas!</p>
+  <main>
+    <section class="banner">
+      <div class="banner-desenho">🧁 🍓 ✨</div>
+      <h1>Um mundo cheio de doces encantos!</h1>
+      <p>Descubra receitas deliciosas e prepare sua sobremesa favorita.</p>
+    </section>
 
-        <nav>
-            <a href="#inicio">Início</a>
-            <a href="#receitas">Receitas</a>
-            <a href="#sobre">Sobre</a>
-        </nav>
-    </header>
+    <section class="busca">
+      <input id="searchInput" type="search"
+        placeholder="🔎 Pesquise uma receita..."
+        aria-label="Pesquisar receitas">
+    </section>
 
-    <main>
+    <nav class="categorias" id="categories">
+      <button class="ativo" data-category="Todas">Todas</button>
+      <button data-category="Bolos">Bolos</button>
+      <button data-category="Docinhos">Docinhos</button>
+      <button data-category="Sobremesas">Sobremesas</button>
+      <button data-category="Mousses">Mousses</button>
+      <button data-category="Tortas">Tortas</button>
+      <button data-category="Biscoitos">Biscoitos</button>
+    </nav>
 
-        <section class="hero" id="inicio">
-            <div class="hero-decoration">🍓 🧁 🍒</div>
+    <p id="resultCount" class="contador"></p>
+    <section id="recipeList" class="receitas"></section>
+    <section id="details" class="details" hidden></section>
+  </main>
 
-            <h1>Bem-vinda à nossa confeitaria! 💗</h1>
+  <footer>
+    <p>Feito com carinho 💗 Doce Encanto © 2026</p>
+    <div>🍓 🧁 🍪 🍒</div>
+  </footer>
 
-            <p>
-                Descubra receitas deliciosas, aprenda a preparar
-                seus doces favoritos e divirta-se!
-            </p>
-
-            <input
-                type="search"
-                id="search"
-                placeholder="🔎 Procurar uma receitinha..."
-                autocomplete="off"
-            >
-        </section>
-
-        <section class="categories">
-            <h2>🎀 Nosso livro de receitas</h2>
-            <p>Escolha uma delícia para preparar!</p>
-
-            <div class="category-buttons">
-                <button data-category="Todas">Todas</button>
-                <button data-category="Bolos">🎂 Bolos</button>
-                <button data-category="Docinhos">🍬 Docinhos</button>
-                <button data-category="Sobremesas">🍮 Sobremesas</button>
-                <button data-category="Mousses">🍓 Mousses</button>
-                <button data-category="Tortas">🥧 Tortas</button>
-                <button data-category="Biscoitos">🍪 Biscoitos</button>
-                <button data-category="Doces">🍩 Outros doces</button>
-            </div>
-        </section>
-
-        <section id="receitas">
-            <h2 class="section-title">🍓 Nossas receitinhas</h2>
-
-            <div class="recipe-count" id="recipeCount"></div>
-
-            <div class="recipes" id="recipeList"></div>
-
-            <p class="empty-message" id="emptyMessage" hidden>
-                Ops! Não encontramos essa receitinha. 💕
-            </p>
-        </section>
-
-        <section id="details" class="details" hidden></section>
-
-    </main>
-
-    <footer id="sobre">
-        <h2>🎀 Doces Encantados 🎀</h2>
-
-        <p>
-            Feito com amor, açúcar e muita criatividade!
-        </p>
-
-        <p>© 2026 - Meu Livro Mágico de Receitas</p>
-    </footer>
-
-    <script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>
