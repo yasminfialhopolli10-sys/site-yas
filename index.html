@@ -1,51 +1,138 @@
+<div class="filtros">
+  <button class="filtro ativo" data-tipo="todas">Todas</button>
+  <button class="filtro" data-tipo="doce">🍰 Doces</button>
+  <button class="filtro" data-tipo="salgada">🍕 Salgadas</button>
+</div>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Doce Encanto | Receitas</title>
-  <link rel="stylesheet" href="style.css">
+
+  <title>Doce Encanto | 400 Receitas</title>
+
+  <meta name="description" content="Explore 200 receitas doces e 200 receitas salgadas.">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
   <header class="topo">
     <div class="marca">🍓 Doce Encanto</div>
-    <p>Um mundo inteiro de sabores esperando por você!</p>
+
+    <p>Um mundo de sabores esperando por você!</p>
+
     <div class="numeros">
-      <span><strong id="totalDoces">200</strong> receitas doces</span>
-      <span><strong id="totalSalgadas">200</strong> receitas salgadas</span>
-      <span><strong id="totalReceitas">400</strong> receitas no total</span>
+      <span>
+        <strong id="totalDoces">200</strong>
+        receitas doces
+      </span>
+
+      <span>
+        <strong id="totalSalgadas">200</strong>
+        receitas salgadas
+      </span>
+
+      <span>
+        <strong id="totalReceitas">400</strong>
+        receitas no total
+      </span>
     </div>
   </header>
 
   <main>
+
     <section class="controles">
-      <input id="pesquisa" type="search" placeholder="🔎 Procure uma receita..." aria-label="Pesquisar receitas">
+
+      <input
+        type="search"
+        id="pesquisa"
+        placeholder="🔎 Pesquisar receita..."
+        aria-label="Pesquisar receitas"
+      >
+
       <div class="filtros">
-        <button class="filtro ativo" data-tipo="todas">Todas</button>
-        <button class="filtro" data-tipo="doce">🍰 Doces</button>
-        <button class="filtro" data-tipo="salgada">🍕 Salgadas</button>
+
+        <button
+          class="filtro ativo"
+          data-tipo="todas"
+          type="button"
+        >
+          Todas
+        </button>
+
+        <button
+          class="filtro"
+          data-tipo="doce"
+          type="button"
+        >
+          🍰 Doces
+        </button>
+
+        <button
+          class="filtro"
+          data-tipo="salgada"
+          type="button"
+        >
+          🍕 Salgadas
+        </button>
+
       </div>
-      <p id="contador" aria-live="polite">Mostrando 400 receitas</p>
+
+      <p id="contador" aria-live="polite">
+        Mostrando 400 receitas
+      </p>
+
     </section>
 
-    <section id="catalogo" class="catalogo"></section>
-    <p id="mensagemVazia" class="vazio" hidden>Nenhuma receita encontrada. Tente outra pesquisa. 💗</p>
+    <section
+      id="catalogo"
+      class="catalogo"
+      aria-label="Catálogo de receitas"
+    >
+    </section>
+
+    <p id="mensagemVazia" class="vazio" hidden>
+      Nenhuma receita encontrada. Tente outra pesquisa.
+    </p>
+
   </main>
 
-  <div id="modal" class="modal" aria-hidden="true">
+  <div
+    id="modal"
+    class="modal"
+    aria-hidden="true"
+  >
+
     <div class="modal-conteudo">
-      <button id="fecharModal" class="fechar" aria-label="Fechar">×</button>
+
+      <button
+        id="fecharModal"
+        class="fechar"
+        type="button"
+        aria-label="Fechar receita"
+      >
+        ×
+      </button>
+
       <div id="detalhes"></div>
+
     </div>
+
   </div>
 
   <footer>
-    Feito com carinho e uma pitadinha de açúcar 💗
+    <p>Doce Encanto — 200 receitas doces e 200 receitas salgadas.</p>
   </footer>
 
   <script src="script.js"></script>
+
 </body>
 </html>
