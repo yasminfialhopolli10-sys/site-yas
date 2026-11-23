@@ -4,47 +4,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#ffdce9">
-  <title>Doce Encanto</title>
+  <meta name="theme-color" content="#fff1f5">
+  <title>Doce Encanto | Receitas</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="topo">
-    <a class="logo" href="#">🍰 Doce Encanto</a>
-    <p>Receitas feitas com carinho e açúcar!</p>
+    <a class="logo" href="#">🍓 Doce Encanto</a>
+    <p>Receitas para todos os momentos!</p>
   </header>
 
   <main>
-    <section class="banner">
-      <div class="banner-desenho">🧁 🍓 ✨</div>
-      <h1>Um mundo cheio de doces encantos!</h1>
-      <p>Descubra receitas deliciosas e prepare sua sobremesa favorita.</p>
+    <section class="hero">
+      <span class="hero-decor">🍰 ✨ 🍓</span>
+      <h1>Um mundo de sabores!</h1>
+      <p>Encontre sua próxima receita favorita.</p>
+      <div class="contadores">
+        <div><strong id="sweetCount">0</strong><span>Doces</span></div>
+        <div><strong id="savoryCount">0</strong><span>Salgadas</span></div>
+      </div>
     </section>
 
-    <section class="busca">
+    <section class="filtros">
       <input id="searchInput" type="search"
-        placeholder="🔎 Pesquise uma receita..."
-        aria-label="Pesquisar receitas">
+        placeholder="🔎 Pesquisar uma receita...">
+
+      <div class="botoes">
+        <button class="filter active" data-type="all">Todas</button>
+        <button class="filter" data-type="sweet">🍰 Doces</button>
+        <button class="filter" data-type="savory">🍕 Salgadas</button>
+      </div>
     </section>
 
-    <nav class="categorias" id="categories">
-      <button class="ativo" data-category="Todas">Todas</button>
-      <button data-category="Bolos">Bolos</button>
-      <button data-category="Docinhos">Docinhos</button>
-      <button data-category="Sobremesas">Sobremesas</button>
-      <button data-category="Mousses">Mousses</button>
-      <button data-category="Tortas">Tortas</button>
-      <button data-category="Biscoitos">Biscoitos</button>
-    </nav>
+    <div class="resultado">
+      <h2 id="sectionTitle">Todas as receitas</h2>
+      <span id="resultCount">Carregando receitas...</span>
+    </div>
 
-    <p id="resultCount" class="contador"></p>
-    <section id="recipeList" class="receitas"></section>
+    <section id="recipeList" class="receitas">
+      <div class="loading">Preparando o nosso livro de receitas... 🍳</div>
+    </section>
+
     <section id="details" class="details" hidden></section>
   </main>
 
   <footer>
-    <p>Feito com carinho 💗 Doce Encanto © 2026</p>
-    <div>🍓 🧁 🍪 🍒</div>
+    <h2>🍓 Doce Encanto</h2>
+    <p>Feito com carinho e muitas receitas!</p>
   </footer>
 
   <script src="script.js"></script>

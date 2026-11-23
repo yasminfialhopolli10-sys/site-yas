@@ -1,4 +1,13 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+:root {
+  --rosa: #e987aa;
+  --rosa-claro: #fff0f5;
+  --texto: #70465a;
+  --fundo: #fff9fb;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,197 +15,244 @@
 }
 
 body {
-  font-family: "Trebuchet MS", Arial, sans-serif;
-  background: #fff5f8;
-  color: #75465b;
-  transition: background .5s, color .5s;
+  font-family: 'Nunito', sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
 }
 
 .topo {
-  background: #ffcadd;
-  padding: 25px 15px;
   text-align: center;
+  padding: 25px 15px;
+  background: #ffd9e6;
 }
 
 .logo {
-  color: #753c58;
-  font-size: 32px;
-  font-weight: bold;
+  display: inline-block;
+  color: #87445e;
+  font-size: 30px;
+  font-weight: 900;
   text-decoration: none;
 }
 
 .topo p {
-  margin-top: 8px;
+  margin-top: 5px;
 }
 
-.banner {
+.hero {
   text-align: center;
   padding: 55px 20px 35px;
+  background: linear-gradient(135deg, #fff0f5, #ffe0eb);
 }
 
-.banner h1 {
-  font-size: clamp(25px, 5vw, 40px);
-  margin: 15px auto;
-  max-width: 750px;
+.hero h1 {
+  font-size: clamp(28px, 5vw, 43px);
+  margin: 12px 0;
 }
 
-.banner p {
-  line-height: 1.6;
+.hero p {
+  font-size: 17px;
 }
 
-.banner-desenho {
-  font-size: 38px;
+.hero-decor {
+  font-size: 35px;
+  display: inline-block;
   animation: flutuar 2s infinite ease-in-out;
 }
 
-@keyframes flutuar {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-.busca {
+.contadores {
   display: flex;
   justify-content: center;
-  padding: 15px;
+  gap: 15px;
+  margin-top: 25px;
 }
 
-.busca input {
-  width: min(90%, 550px);
+.contadores div {
+  background: white;
+  padding: 12px 25px;
+  border-radius: 17px;
+  box-shadow: 0 4px 12px #0000000d;
+}
+
+.contadores strong,
+.contadores span {
+  display: block;
+}
+
+.contadores strong {
+  font-size: 25px;
+  color: var(--rosa);
+}
+
+.filtros {
+  max-width: 1000px;
+  margin: 30px auto 20px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+#searchInput {
+  width: min(100%, 600px);
   padding: 15px 20px;
-  border: 2px solid #f2b5ca;
+  border: 2px solid #f2bfd0;
   border-radius: 30px;
   font-size: 16px;
   outline: none;
-  background: white;
+  font-family: inherit;
 }
 
-.busca input:focus {
-  border-color: #d66c99;
+#searchInput:focus {
+  border-color: var(--rosa);
 }
 
-.categorias {
+.botoes {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
-  padding: 20px;
+  margin-top: 20px;
 }
 
-.categorias button {
+.filter {
   border: none;
+  padding: 11px 22px;
   border-radius: 25px;
-  padding: 11px 18px;
-  background: #ffe0eb;
-  color: #75465b;
+  background: #ffe3ec;
+  color: var(--texto);
   cursor: pointer;
+  font-weight: 800;
+  font-family: inherit;
   transition: .2s;
 }
 
-.categorias button:hover,
-.categorias button.ativo {
-  background: #d66c99;
+.filter:hover,
+.filter.active {
+  background: var(--rosa);
   color: white;
-  transform: translateY(-2px);
 }
 
-.contador {
-  text-align: center;
-  margin: 5px 0 20px;
-  font-size: 14px;
+.resultado {
+  max-width: 1150px;
+  margin: 35px auto 15px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.resultado h2 {
+  font-size: 23px;
+}
+
+#resultCount {
+  font-size: 13px;
 }
 
 .receitas {
-  max-width: 1150px;
-  margin: auto;
-  padding: 0 20px 55px;
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  padding: 0 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 22px;
 }
 
 .card {
   background: white;
-  border-radius: 22px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 5px 18px #00000012;
+  box-shadow: 0 5px 18px #75465b14;
   transition: transform .25s;
 }
 
 .card:hover {
-  transform: translateY(-7px);
+  transform: translateY(-6px);
 }
 
-.card-emoji {
-  background: var(--fundo);
-  padding: 25px;
-  text-align: center;
-  font-size: 65px;
-}
-
-.card-conteudo {
-  padding: 18px;
-}
-
-.card h2 {
-  font-size: 19px;
-  margin-bottom: 9px;
-}
-
-.card p {
-  font-size: 14px;
-  line-height: 1.5;
-  margin-bottom: 12px;
-}
-
-.card small {
+.card img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
   display: block;
+  background: #ffe5ed;
+}
+
+.card-info {
+  padding: 17px;
+}
+
+.card-info h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.card-info p {
+  font-size: 13px;
   margin-bottom: 13px;
 }
 
+.tipo {
+  display: inline-block;
+  background: #fff0f5;
+  color: #a64f72;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
 .card button,
-.botao-voltar {
+.voltar {
   border: none;
   border-radius: 25px;
   padding: 11px 18px;
-  background: var(--detalhe);
+  background: var(--rosa);
   color: white;
+  font-weight: 800;
   cursor: pointer;
-  font-size: 14px;
+  font-family: inherit;
 }
 
 .card button:hover,
-.botao-voltar:hover {
-  filter: brightness(.93);
+.voltar:hover {
+  filter: brightness(.94);
+}
+
+.loading,
+.vazio {
+  text-align: center;
+  padding: 40px;
+  grid-column: 1 / -1;
 }
 
 .details {
-  --fundo: #ffe0eb;
-  --detalhe: #d66c99;
-  --texto: #75465b;
-  max-width: 850px;
-  margin: 20px auto 60px;
-  padding: 30px;
+  --fundo: #fff0f5;
+  --detalhe: #e987aa;
+  max-width: 900px;
+  margin: 25px auto 60px;
+  padding: 25px;
   border-radius: 25px;
   background: var(--fundo);
-  color: var(--texto);
-  box-shadow: 0 5px 18px #00000012;
 }
 
 .details[hidden] {
   display: none;
 }
 
-.details h1 {
-  text-align: center;
-  margin: 12px 0;
+.details img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 18px;
 }
 
 .details h2 {
-  margin: 25px 0 12px;
+  margin: 22px 0 12px;
 }
 
-.details p {
-  line-height: 1.7;
+.details h3 {
+  margin: 22px 0 10px;
 }
 
 .details ul,
@@ -205,157 +261,119 @@ body {
   line-height: 1.9;
 }
 
-.detalhe-emoji {
-  font-size: 75px;
-  text-align: center;
-  animation: flutuar 2s infinite;
+.details p {
+  line-height: 1.7;
 }
 
-.informacoes {
-  text-align: center;
-  margin: 12px 0;
-  font-size: 14px;
-}
-
-.dica {
-  margin-top: 22px;
-  padding: 17px;
-  background: #ffffff99;
-  border-radius: 15px;
-}
-
-.botao-voltar {
-  margin-top: 25px;
+.voltar {
   background: #75465b;
+  margin-bottom: 15px;
 }
 
-/* ANIMAÇÃO DA RECEITA */
-
-.animacao {
-  margin-top: 25px;
-  padding: 25px 12px;
-  border-radius: 22px;
-  background: #ffffffa6;
+.animation-box {
+  margin-top: 30px;
+  padding: 25px 15px;
+  border-radius: 20px;
+  background: #ffffffb8;
   text-align: center;
   overflow: hidden;
 }
 
-.animacao h2 {
-  margin: 0 0 8px;
+.animation-box h3 {
+  margin-top: 0;
 }
 
-.animacao p {
-  font-size: 14px;
-}
-
-.cena {
+.kitchen {
   position: relative;
-  height: 190px;
-  max-width: 440px;
-  margin: 20px auto 10px;
+  height: 170px;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 75px;
 }
 
-.tigela {
+.bowl {
+  animation: mexer 2s infinite ease-in-out;
+  display: inline-block;
+}
+
+.ingredient {
   position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 85px;
-  animation: tigela-mexe 3s ease-in-out infinite;
-}
-
-.colher {
-  position: absolute;
-  left: 56%;
-  top: 25px;
-  font-size: 48px;
-  transform-origin: 10% 90%;
-  animation: mexer 1.5s ease-in-out infinite;
-}
-
-.ingrediente {
-  position: absolute;
-  top: 0;
-  font-size: 30px;
-  animation: cair 2.5s ease-in infinite;
-}
-
-.ingrediente.um {
+  top: 15px;
   left: 20%;
-  animation-delay: 0s;
+  font-size: 30px;
+  animation: cair 2s infinite ease-in;
 }
 
-.ingrediente.dois {
-  left: 45%;
-  animation-delay: .8s;
+.ingredient.two {
+  left: 70%;
+  animation-delay: .7s;
 }
 
-.ingrediente.tres {
-  right: 18%;
-  animation-delay: 1.5s;
-}
-
-.sobremesa-pronta {
+.spoon {
   position: absolute;
-  bottom: 12px;
-  right: 12%;
-  font-size: 65px;
-  animation: aparecer 3s ease-in-out infinite;
+  font-size: 40px;
+  right: 25%;
+  top: 45px;
+  animation: colher 1.5s infinite ease-in-out;
 }
 
-.brulhinho {
+.final-food {
   position: absolute;
-  top: 10px;
-  right: 18%;
-  font-size: 28px;
-  animation: brilho 1s infinite alternate;
+  bottom: 0;
+  font-size: 43px;
+  animation: aparecer 2s infinite;
+}
+
+.animation-caption {
+  font-weight: 800;
+  margin-top: 8px;
+}
+
+@keyframes flutuar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 @keyframes mexer {
-  0%, 100% { transform: rotate(-35deg); }
-  50% { transform: rotate(35deg); }
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
 }
 
 @keyframes cair {
-  0% { transform: translateY(-15px) rotate(0); opacity: 0; }
-  30% { opacity: 1; }
-  75% { transform: translateY(105px) rotate(180deg); opacity: 1; }
-  100% { transform: translateY(125px); opacity: 0; }
+  0% { transform: translateY(-20px); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(95px); opacity: 0; }
 }
 
-@keyframes tigela-mexe {
-  0%, 100% { transform: translateX(-50%) rotate(-3deg); }
-  50% { transform: translateX(-50%) rotate(3deg); }
+@keyframes colher {
+  0%, 100% { transform: rotate(-25deg); }
+  50% { transform: rotate(35deg); }
 }
 
 @keyframes aparecer {
-  0%, 35% { transform: scale(.2) rotate(-15deg); opacity: 0; }
-  55% { transform: scale(1.15) rotate(8deg); opacity: 1; }
-  70%, 100% { transform: scale(1) rotate(0); opacity: 1; }
-}
-
-@keyframes brilho {
-  from { transform: scale(.7) rotate(0); opacity: .4; }
-  to { transform: scale(1.3) rotate(25deg); opacity: 1; }
+  0%, 40% { transform: scale(.5); opacity: 0; }
+  70%, 100% { transform: scale(1); opacity: 1; }
 }
 
 footer {
   text-align: center;
-  padding: 25px;
-  background: #ffcadd;
-  color: #753c58;
-  line-height: 2;
-}
-
-footer div {
-  font-size: 25px;
+  padding: 30px;
+  background: #ffd9e6;
 }
 
 @media (max-width: 600px) {
-  .logo { font-size: 27px; }
-  .details { margin: 15px; padding: 20px; }
-  .categorias { gap: 7px; }
+  .resultado {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .details {
+    margin: 15px;
+    padding: 18px;
+  }
+
+  .contadores {
+    gap: 8px;
+  }
 }
