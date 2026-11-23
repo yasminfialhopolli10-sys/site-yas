@@ -1,261 +1,292 @@
-
-const API = "https://www.themealdb.com/api/json/v1/1";
-
-const recipeList = document.getElementById("recipeList");
-const details = document.getElementById("details");
-const searchInput = document.getElementById("searchInput");
-const resultCount = document.getElementById("resultCount");
-const sectionTitle = document.getElementById("sectionTitle");
-
-let recipes = [];
-let currentType = "all";
-
-const sweetCategories = ["Dessert"];
-const savoryCategories = [
-  "Beef", "Chicken", "Seafood", "Pasta",
-  "Pork", "Lamb", "Starter", "Side",
-  "Vegan", "Vegetarian", "Breakfast",
-  "Miscellaneous"
+const variacoesDoces = [
+  "tradicional",
+  "com chocolate",
+  "com morango",
+  "com coco",
+  "com leite condensado",
+  "com baunilha",
+  "com frutas",
+  "cremoso",
+  "caseiro",
+  "especial"
 ];
 
-async function getJSON(url) {
-  const response = await fetch(url);
+const variacoesSalgadas = [
+  "tradicional",
+  "com queijo",
+  "com frango",
+  "com legumes",
+  "ao forno",
+  "cremoso",
+  "caseiro",
+  "com ervas",
+  "especial",
+  "gratinado"
+];
 
-  if (!response.ok) {
-    throw new Error("Não foi possível carregar as receitas.");
-  }
+const basesDoces = [
+  "Bolo de cenoura", "Bolo de chocolate", "Bolo de fubá",
+  "Bolo de limão", "Bolo de laranja", "Bolo de coco",
+  "Brigadeiro", "Beijinho", "Pudim", "Mousse",
+  "Torta de maçã", "Torta de limão", "Brownie",
+  "Cookie", "Cupcake", "Panqueca doce", "Waffle",
+  "Pavê", "Arroz doce", "Cheesecake"
+];
 
-  return response.json();
-}
+const basesSalgadas = [
+  "Lasanha", "Escondidinho", "Torta salgada", "Empadão",
+  "Quiche", "Panqueca salgada", "Pizza", "Hambúrguer caseiro",
+  "Almôndegas", "Frango assado", "Strogonoff", "Macarrão",
+  "Risoto", "Esfiha", "Pastel", "Pão recheado",
+  "Batata gratinada", "Sopa cremosa", "Salada especial",
+  "Arroz de forno"
+];
 
-async function loadCategory(category, type) {
-  try {
-    const data = await getJSON(
-      `${API}/filter.php?c=${encodeURIComponent(category)}`
-    );
+// Fotos reais de alimentos hospedadas no Unsplash.
+// São imagens ilustrativas: podem não representar exatamente a variação da receita.
+const fotosDoces = [
+  "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800",
+  "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800",
+  "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=800",
+  "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800",
+  "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800",
+  "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=800",
+  "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=800",
+  "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800"
+];
 
-    return (data.meals || []).map(meal => ({
-      id: meal.idMeal,
-      name: meal.strMeal,
-      image: meal.strMealThumb,
-      type,
-      category
-    }));
-  } catch (error) {
-    console.error("Erro na categoria:", category, error);
-    return [];
-  }
-}
+const fotosSalgadas = [
+  "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800",
+  "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=800",
+  "https://images.unsplash.com/photo-1547592180-85f173990554?w=800",
+  "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800",
+  "https://images.unsplash.com/photo-1546549032-9571cd6b27df?w=800",
+  "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800",
+  "https://images.unsplash.com/photo-1547592180-85f173990554?w=800",
+  "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800"
+];
 
-async function loadRecipes() {
-  recipeList.innerHTML =
-    '<div class="loading">Buscando fotografias e receitas... 🍳</div>';
+const ingredientesDoces = [
+  "2 xícaras de farinha de trigo",
+  "1 xícara de açúcar",
+  "2 ovos",
+  "1 xícara de leite",
+  "2 colheres de manteiga",
+  "1 colher de fermento em pó",
+  "1 pitada de sal",
+  "1 colher de essência de baunilha"
+];
 
-  try {
-    const results = await Promise.all([
-      ...sweetCategories.map(category =>
-        loadCategory(category, "sweet")
-      ),
-      ...savoryCategories.map(category =>
-        loadCategory(category, "savory")
-      )
-    ]);
+const ingredientesSalgados = [
+  "2 xícaras de farinha de trigo",
+  "2 ovos",
+  "1 xícara de leite",
+  "2 colheres de azeite",
+  "1 cebola picada",
+  "2 dentes de alho",
+  "1 xícara de queijo ralado",
+  "Sal e pimenta a gosto",
+  "Cheiro-verde a gosto"
+];
 
-    const unique = new Map();
+const preparosDoces = [
+  "Separe todos os ingredientes e preaqueça o forno a 180 °C, se a receita precisar assar.",
+  "Em uma tigela, misture os ingredientes secos.",
+  "Acrescente os ovos, o leite e a manteiga. Misture até obter uma massa homogênea.",
+  "Adicione os ingredientes de sabor indicados no nome da receita.",
+  "Coloque em uma forma untada ou no recipiente adequado.",
+  "Asse por aproximadamente 30 a 40 minutos, quando for uma preparação de forno, ou cozinhe conforme a consistência desejada.",
+  "Espere esfriar antes de servir. Finalize com a cobertura ou decoração de sua preferência."
+];
 
-    results.flat().forEach(recipe => {
-      if (!unique.has(recipe.id)) {
-        unique.set(recipe.id, recipe);
-      }
+const preparosSalgados = [
+  "Organize os ingredientes e pique os vegetais.",
+  "Aqueça o azeite em uma panela e refogue a cebola e o alho.",
+  "Acrescente o ingrediente principal e tempere com sal, pimenta e cheiro-verde.",
+  "Prepare a massa ou a base da receita, misturando os ingredientes indicados.",
+  "Junte o recheio à massa ou ao acompanhamento.",
+  "Leve ao forno preaquecido a 180 °C por aproximadamente 30 a 40 minutos, se for uma receita assada. Para receitas de panela, cozinhe até os ingredientes ficarem macios e bem cozidos.",
+  "Confira o cozimento, ajuste os temperos e sirva."
+];
+
+function criarReceitas(bases, variacoes, tipo) {
+  const receitas = [];
+
+  bases.forEach((base, indiceBase) => {
+    variacoes.forEach((variacao, indiceVariacao) => {
+      const doce = tipo === "doce";
+      const nome = `${base} ${variacao}`;
+
+      receitas.push({
+        id: `${tipo}-${indiceBase}-${indiceVariacao}`,
+        nome,
+        tipo,
+        foto: doce
+          ? fotosDoces[(indiceBase + indiceVariacao) % fotosDoces.length]
+          : fotosSalgadas[(indiceBase + indiceVariacao) % fotosSalgadas.length],
+        ingredientes: doce
+          ? [...ingredientesDoces, "Ingrediente de sabor: " + variacao]
+          : [...ingredientesSalgados, "Ingrediente principal: " + base],
+        preparo: doce ? preparosDoces : preparosSalgados,
+        tempo: doce ? "35 minutos" : "45 minutos"
+      });
     });
-
-    recipes = [...unique.values()];
-
-    const sweets = recipes.filter(r => r.type === "sweet");
-    const savory = recipes.filter(r => r.type === "savory");
-
-    document.getElementById("sweetCount").textContent = sweets.length;
-    document.getElementById("savoryCount").textContent = savory.length;
-
-    renderRecipes();
-  } catch (error) {
-    recipeList.innerHTML =
-      '<div class="vazio">Não foi possível carregar as receitas. Confira sua conexão e tente novamente.</div>';
-  }
-}
-
-function renderRecipes() {
-  const term = searchInput.value.trim().toLowerCase();
-
-  let filtered = recipes.filter(recipe => {
-    const matchesType =
-      currentType === "all" || recipe.type === currentType;
-
-    const matchesSearch =
-      recipe.name.toLowerCase().includes(term) ||
-      recipe.category.toLowerCase().includes(term);
-
-    return matchesType && matchesSearch;
   });
 
-  sectionTitle.textContent =
-    currentType === "sweet" ? "Receitas doces" :
-    currentType === "savory" ? "Receitas salgadas" :
-    "Todas as receitas";
-
-  resultCount.textContent =
-    `${filtered.length} receitas encontradas`;
-
-  if (!filtered.length) {
-    recipeList.innerHTML =
-      '<div class="vazio">Nenhuma receita encontrada. Tente outra pesquisa. 🍓</div>';
-    return;
-  }
-
-  recipeList.innerHTML = filtered.map(recipe => `
-    <article class="card">
-      <img
-        src="${escapeHTML(recipe.image)}"
-        alt="${escapeHTML(recipe.name)}"
-        loading="lazy"
-        onerror="this.src='https://placehold.co/600x400?text=Receita'"
-      >
-      <div class="card-info">
-        <span class="tipo">
-          ${recipe.type === "sweet" ? "🍰 DOCE" : "🍕 SALGADA"}
-        </span>
-        <h3>${escapeHTML(recipe.name)}</h3>
-        <p>${escapeHTML(recipe.category)}</p>
-        <button onclick="openRecipe('${recipe.id}')">
-          Ver receita →
-        </button>
-      </div>
-    </article>
-  `).join("");
+  return receitas;
 }
 
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, char => ({
+const receitas = [
+  ...criarReceitas(basesDoces, variacoesDoces, "doce"),
+  ...criarReceitas(basesSalgadas, variacoesSalgadas, "salgada")
+];
+
+const catalogo = document.getElementById("catalogo");
+const pesquisa = document.getElementById("pesquisa");
+const contador = document.getElementById("contador");
+const mensagemVazia = document.getElementById("mensagemVazia");
+const modal = document.getElementById("modal");
+const detalhes = document.getElementById("detalhes");
+
+let filtroAtual = "todas";
+
+function escaparHTML(texto) {
+  return String(texto).replace(/[&<>"']/g, caractere => ({
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",
     '"': "&quot;",
     "'": "&#039;"
-  })[char]);
+  })[caractere]);
 }
 
-async function openRecipe(id) {
-  details.hidden = false;
-  details.innerHTML = "<p>Carregando receita... 🍳</p>";
-  details.scrollIntoView({ behavior: "smooth" });
+function mostrarReceitas() {
+  const termo = pesquisa.value.trim().toLowerCase();
 
-  try {
-    const data = await getJSON(`${API}/lookup.php?i=${id}`);
-    const recipe = data.meals?.[0];
+  const filtradas = receitas.filter(receita => {
+    const combinaTipo =
+      filtroAtual === "todas" || receita.tipo === filtroAtual;
 
-    if (!recipe) {
-      throw new Error("Receita não encontrada.");
-    }
+    const combinaNome = receita.nome.toLowerCase().includes(termo);
 
-    const ingredients = [];
+    return combinaTipo && combinaNome;
+  });
 
-    for (let i = 1; i <= 20; i++) {
-      const ingredient = recipe[`strIngredient${i}`]?.trim();
-      const measure = recipe[`strMeasure${i}`]?.trim();
-
-      if (ingredient) {
-        ingredients.push(
-          `${escapeHTML(measure || "")} ${escapeHTML(ingredient)}`
-        );
-      }
-    }
-
-    const selected = recipes.find(r => r.id === id);
-    const isSweet = selected?.type === "sweet";
-
-    const steps = (recipe.strInstructions || "")
-      .split(/\r?\n/)
-      .map(step => step.trim())
-      .filter(Boolean);
-
-    const animationEmoji = isSweet ? "🍰" : "🍕";
-    const animationTitle = isSweet
-      ? "Preparando uma delícia!"
-      : "Preparando uma receita especial!";
-
-    details.innerHTML = `
-      <button class="voltar" onclick="closeRecipe()">
-        ← Voltar às receitas
-      </button>
-
+  catalogo.innerHTML = filtradas.map(receita => `
+    <article class="receita-card">
       <img
-        src="${escapeHTML(recipe.strMealThumb)}"
-        alt="${escapeHTML(recipe.strMeal)}"
+        src="${receita.foto}"
+        alt="Imagem ilustrativa de ${escaparHTML(receita.nome)}"
+        loading="lazy"
+        onerror="this.src='https://placehold.co/600x400/ffe5ef/9b5272?text=Receita'"
       >
 
-      <h1>${escapeHTML(recipe.strMeal)}</h1>
-      <p>Categoria: ${escapeHTML(recipe.strCategory || "Receita")}</p>
-      <p>Origem: ${escapeHTML(recipe.strArea || "Internacional")}</p>
+      <div class="card-info">
+        <span class="etiqueta ${receita.tipo}">
+          ${receita.tipo === "doce" ? "🍰 Doce" : "🍕 Salgada"}
+        </span>
 
-      <h2>🛒 Ingredientes</h2>
-      <ul>
-        ${ingredients.map(item => `<li>${item}</li>`).join("")}
-      </ul>
+        <h2>${escaparHTML(receita.nome)}</h2>
+        <p>⏱️ ${receita.tempo}</p>
 
-      <h2>👩‍🍳 Modo de preparo</h2>
-      <ol>
-        ${steps.map(step => `<li>${escapeHTML(step)}</li>`).join("")}
-      </ol>
-
-      <div class="animation-box">
-        <h3>${animationTitle}</h3>
-        <div class="kitchen">
-          <span class="ingredient">🥣</span>
-          <span class="ingredient two">✨</span>
-          <span class="spoon">🥄</span>
-          <span class="bowl">🥣</span>
-          <span class="final-food">${animationEmoji}</span>
-        </div>
-        <p class="animation-caption">
-          Misturando, preparando e finalizando! 💗
-        </p>
+        <button
+          class="ver-receita"
+          onclick="abrirReceita('${receita.id}')"
+        >
+          Ver receita
+        </button>
       </div>
+    </article>
+  `).join("");
 
-      ${recipe.strYoutube ? `
-        <h3>🎥 Vídeo da receita</h3>
-        <a href="${escapeHTML(recipe.strYoutube)}" target="_blank" rel="noopener">
-          Assistir ao vídeo
-        </a>
-      ` : ""}
-    `;
-  } catch (error) {
-    details.innerHTML = `
-      <p>Não foi possível abrir esta receita.</p>
-      <button class="voltar" onclick="closeRecipe()">Voltar</button>
-    `;
-  }
+  contador.textContent = `Mostrando ${filtradas.length} receitas`;
+  mensagemVazia.hidden = filtradas.length !== 0;
 }
 
-function closeRecipe() {
-  details.hidden = true;
-  details.innerHTML = "";
-  document.getElementById("recipeList")
-    .scrollIntoView({ behavior: "smooth" });
+function abrirReceita(id) {
+  const receita = receitas.find(item => item.id === id);
+
+  if (!receita) return;
+
+  const listaIngredientes = receita.ingredientes
+    .map(item => `<li>${escaparHTML(item)}</li>`)
+    .join("");
+
+  const listaPreparo = receita.preparo
+    .map((item, indice) => `
+      <p><strong>${indice + 1}.</strong> ${escaparHTML(item)}</p>
+    `)
+    .join("");
+
+  detalhes.innerHTML = `
+    <img
+      class="detalhe-foto"
+      src="${receita.foto}"
+      alt="Imagem ilustrativa de ${escaparHTML(receita.nome)}"
+    >
+
+    <span class="etiqueta ${receita.tipo}">
+      ${receita.tipo === "doce" ? "🍰 Receita doce" : "🍕 Receita salgada"}
+    </span>
+
+    <h2>${escaparHTML(receita.nome)}</h2>
+    <p>⏱️ Tempo aproximado: ${receita.tempo}</p>
+
+    <h3>🛒 Ingredientes</h3>
+    <ul>${listaIngredientes}</ul>
+
+    <h3>👩‍🍳 Modo de preparo</h3>
+    <div class="preparo">${listaPreparo}</div>
+
+    <h3>✨ Preparando a receita...</h3>
+    <div class="animacao" aria-label="Animação de preparo">
+      <span>🥣</span>
+      <span>🥄</span>
+      <span>🍓</span>
+      <span>🍰</span>
+    </div>
+  `;
+
+  modal.classList.add("aberto");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
 }
 
-searchInput.addEventListener("input", renderRecipes);
+function fecharReceita() {
+  modal.classList.remove("aberto");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
 
-document.querySelectorAll(".filter").forEach(button => {
-  button.addEventListener("click", () => {
-    document.querySelectorAll(".filter").forEach(item =>
-      item.classList.remove("active")
-    );
+document.querySelectorAll(".filtro").forEach(botao => {
+  botao.addEventListener("click", () => {
+    document.querySelector(".filtro.ativo")?.classList.remove("ativo");
+    botao.classList.add("ativo");
 
-    button.classList.add("active");
-    currentType = button.dataset.type;
-    details.hidden = true;
-    renderRecipes();
+    filtroAtual = botao.dataset.tipo;
+    mostrarReceitas();
   });
 });
 
-loadRecipes();
+pesquisa.addEventListener("input", mostrarReceitas);
+
+document.getElementById("fecharModal").addEventListener("click", fecharReceita);
+
+modal.addEventListener("click", evento => {
+  if (evento.target === modal) fecharReceita();
+});
+
+document.addEventListener("keydown", evento => {
+  if (evento.key === "Escape") fecharReceita();
+});
+
+// Confere a quantidade criada no catálogo.
+document.getElementById("totalDoces").textContent =
+  receitas.filter(r => r.tipo === "doce").length;
+
+document.getElementById("totalSalgadas").textContent =
+  receitas.filter(r => r.tipo === "salgada").length;
+
+document.getElementById("totalReceitas").textContent = receitas.length;
+
+mostrarReceitas();

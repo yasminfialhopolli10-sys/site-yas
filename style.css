@@ -1,379 +1,310 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
-
 :root {
-  --rosa: #e987aa;
-  --rosa-claro: #fff0f5;
-  --texto: #70465a;
-  --fundo: #fff9fb;
+  --fundo: #fff8fb;
+  --texto: #493642;
+  --rosa: #e98bad;
+  --rosa-escuro: #c75f86;
+  --cartao: #ffffff;
+  --sombra: 0 8px 25px rgba(100, 50, 75, .10);
 }
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  font-family: 'Nunito', sans-serif;
+  margin: 0;
   background: var(--fundo);
   color: var(--texto);
+  font-family: "Nunito", sans-serif;
 }
 
 .topo {
+  padding: 45px 20px 35px;
   text-align: center;
-  padding: 25px 15px;
-  background: #ffd9e6;
+  background: linear-gradient(135deg, #ffe0ec, #fff1d9);
 }
 
-.logo {
-  display: inline-block;
-  color: #87445e;
-  font-size: 30px;
-  font-weight: 900;
-  text-decoration: none;
+.marca {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  font-weight: 700;
+  color: #a94f77;
 }
 
 .topo p {
-  margin-top: 5px;
+  margin: 10px 0 22px;
+  font-size: 1.05rem;
 }
 
-.hero {
-  text-align: center;
-  padding: 55px 20px 35px;
-  background: linear-gradient(135deg, #fff0f5, #ffe0eb);
-}
-
-.hero h1 {
-  font-size: clamp(28px, 5vw, 43px);
-  margin: 12px 0;
-}
-
-.hero p {
-  font-size: 17px;
-}
-
-.hero-decor {
-  font-size: 35px;
-  display: inline-block;
-  animation: flutuar 2s infinite ease-in-out;
-}
-
-.contadores {
+.numeros {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 15px;
-  margin-top: 25px;
+  gap: 12px;
 }
 
-.contadores div {
+.numeros span {
+  background: #ffffffc9;
+  border-radius: 30px;
+  padding: 9px 17px;
+  font-size: .9rem;
+}
+
+main {
+  width: min(1200px, 92%);
+  margin: 30px auto 60px;
+}
+
+.controles {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+#pesquisa {
+  width: min(600px, 100%);
+  padding: 15px 20px;
+  border: 2px solid #f2c5d6;
+  border-radius: 30px;
+  outline: none;
+  font: inherit;
   background: white;
-  padding: 12px 25px;
-  border-radius: 17px;
-  box-shadow: 0 4px 12px #0000000d;
 }
 
-.contadores strong,
-.contadores span {
-  display: block;
-}
-
-.contadores strong {
-  font-size: 25px;
-  color: var(--rosa);
+#pesquisa:focus {
+  border-color: var(--rosa-escuro);
+  box-shadow: 0 0 0 3px #e98bad30;
 }
 
 .filtros {
-  max-width: 1000px;
-  margin: 30px auto 20px;
-  padding: 0 20px;
-  text-align: center;
-}
-
-#searchInput {
-  width: min(100%, 600px);
-  padding: 15px 20px;
-  border: 2px solid #f2bfd0;
-  border-radius: 30px;
-  font-size: 16px;
-  outline: none;
-  font-family: inherit;
-}
-
-#searchInput:focus {
-  border-color: var(--rosa);
-}
-
-.botoes {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 20px;
+  margin-top: 17px;
 }
 
-.filter {
-  border: none;
-  padding: 11px 22px;
+.filtro {
+  border: 0;
   border-radius: 25px;
-  background: #ffe3ec;
-  color: var(--texto);
+  padding: 10px 22px;
   cursor: pointer;
+  background: white;
+  color: var(--texto);
+  font: inherit;
   font-weight: 800;
-  font-family: inherit;
+  box-shadow: var(--sombra);
   transition: .2s;
 }
 
-.filter:hover,
-.filter.active {
+.filtro:hover,
+.filtro.ativo {
   background: var(--rosa);
   color: white;
+  transform: translateY(-2px);
 }
 
-.resultado {
-  max-width: 1150px;
-  margin: 35px auto 15px;
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
+#contador {
+  color: #8b6d7d;
+  font-size: .95rem;
 }
 
-.resultado h2 {
-  font-size: 23px;
-}
-
-#resultCount {
-  font-size: 13px;
-}
-
-.receitas {
-  max-width: 1200px;
-  margin: 0 auto 60px;
-  padding: 0 20px;
+.catalogo {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   gap: 22px;
 }
 
-.card {
-  background: white;
-  border-radius: 20px;
+.receita-card {
   overflow: hidden;
-  box-shadow: 0 5px 18px #75465b14;
-  transition: transform .25s;
+  background: var(--cartao);
+  border-radius: 19px;
+  box-shadow: var(--sombra);
+  transition: transform .2s, box-shadow .2s;
 }
 
-.card:hover {
-  transform: translateY(-6px);
+.receita-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(100, 50, 75, .16);
 }
 
-.card img {
-  width: 100%;
-  height: 190px;
-  object-fit: cover;
+.receita-card img {
   display: block;
-  background: #ffe5ed;
+  width: 100%;
+  height: 175px;
+  object-fit: cover;
+  background: #f7e5ec;
 }
 
 .card-info {
-  padding: 17px;
+  padding: 15px;
 }
 
-.card-info h3 {
-  font-size: 18px;
-  margin-bottom: 8px;
+.etiqueta {
+  display: inline-block;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: .75rem;
+  font-weight: 800;
+  background: #ffe5ef;
+  color: #a94f77;
+}
+
+.etiqueta.salgada {
+  background: #fff0d9;
+  color: #98602b;
+}
+
+.card-info h2 {
+  margin: 10px 0;
+  font-family: "Playfair Display", serif;
+  font-size: 1.2rem;
 }
 
 .card-info p {
-  font-size: 13px;
-  margin-bottom: 13px;
+  color: #806d79;
+  font-size: .9rem;
 }
 
-.tipo {
-  display: inline-block;
-  background: #fff0f5;
-  color: #a64f72;
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 900;
-  margin-bottom: 10px;
-}
-
-.card button,
-.voltar {
-  border: none;
-  border-radius: 25px;
-  padding: 11px 18px;
+.ver-receita {
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+  padding: 11px;
   background: var(--rosa);
   color: white;
+  font: inherit;
   font-weight: 800;
   cursor: pointer;
-  font-family: inherit;
 }
 
-.card button:hover,
-.voltar:hover {
-  filter: brightness(.94);
+.ver-receita:hover {
+  background: var(--rosa-escuro);
 }
 
-.loading,
 .vazio {
   text-align: center;
   padding: 40px;
-  grid-column: 1 / -1;
+  color: #8b6d7d;
 }
 
-.details {
-  --fundo: #fff0f5;
-  --detalhe: #e987aa;
-  max-width: 900px;
-  margin: 25px auto 60px;
-  padding: 25px;
-  border-radius: 25px;
-  background: var(--fundo);
-}
-
-.details[hidden] {
+.modal {
   display: none;
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  padding: 20px;
+  overflow-y: auto;
+  background: rgba(45, 25, 38, .65);
 }
 
-.details img {
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  border-radius: 18px;
+.modal.aberto {
+  display: block;
 }
 
-.details h2 {
-  margin: 22px 0 12px;
-}
-
-.details h3 {
-  margin: 22px 0 10px;
-}
-
-.details ul,
-.details ol {
-  padding-left: 25px;
-  line-height: 1.9;
-}
-
-.details p {
-  line-height: 1.7;
-}
-
-.voltar {
-  background: #75465b;
-  margin-bottom: 15px;
-}
-
-.animation-box {
-  margin-top: 30px;
-  padding: 25px 15px;
-  border-radius: 20px;
-  background: #ffffffb8;
-  text-align: center;
-  overflow: hidden;
-}
-
-.animation-box h3 {
-  margin-top: 0;
-}
-
-.kitchen {
+.modal-conteudo {
   position: relative;
-  height: 170px;
+  width: min(760px, 100%);
+  margin: 30px auto;
+  padding: 25px;
+  border-radius: 22px;
+  background: white;
+}
+
+.fechar {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  border: 0;
+  background: transparent;
+  color: #8c526c;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.detalhe-foto {
+  width: 100%;
+  max-height: 330px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+#detalhes h2 {
+  font-family: "Playfair Display", serif;
+  color: #a94f77;
+}
+
+#detalhes li {
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+.preparo {
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+.animacao {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 75px;
+  gap: 18px;
+  min-height: 145px;
+  margin-top: 20px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #fff0f5, #fff6df);
+  font-size: 2.5rem;
 }
 
-.bowl {
-  animation: mexer 2s infinite ease-in-out;
+.animacao span {
   display: inline-block;
+  animation: cozinhar 1.5s ease-in-out infinite;
 }
 
-.ingredient {
-  position: absolute;
-  top: 15px;
-  left: 20%;
-  font-size: 30px;
-  animation: cair 2s infinite ease-in;
+.animacao span:nth-child(2) {
+  animation-delay: .25s;
 }
 
-.ingredient.two {
-  left: 70%;
-  animation-delay: .7s;
+.animacao span:nth-child(3) {
+  animation-delay: .5s;
 }
 
-.spoon {
-  position: absolute;
-  font-size: 40px;
-  right: 25%;
-  top: 45px;
-  animation: colher 1.5s infinite ease-in-out;
+.animacao span:nth-child(4) {
+  animation-delay: .75s;
 }
 
-.final-food {
-  position: absolute;
-  bottom: 0;
-  font-size: 43px;
-  animation: aparecer 2s infinite;
-}
-
-.animation-caption {
-  font-weight: 800;
-  margin-top: 8px;
-}
-
-@keyframes flutuar {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes mexer {
-  0%, 100% { transform: rotate(-5deg); }
-  50% { transform: rotate(5deg); }
-}
-
-@keyframes cair {
-  0% { transform: translateY(-20px); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: translateY(95px); opacity: 0; }
-}
-
-@keyframes colher {
-  0%, 100% { transform: rotate(-25deg); }
-  50% { transform: rotate(35deg); }
-}
-
-@keyframes aparecer {
-  0%, 40% { transform: scale(.5); opacity: 0; }
-  70%, 100% { transform: scale(1); opacity: 1; }
+@keyframes cozinhar {
+  0%, 100% { transform: translateY(8px) rotate(-8deg); }
+  50% { transform: translateY(-18px) rotate(8deg); }
 }
 
 footer {
+  padding: 25px;
   text-align: center;
-  padding: 30px;
-  background: #ffd9e6;
+  background: #ffe0ec;
+  color: #8d5270;
 }
 
-@media (max-width: 600px) {
-  .resultado {
-    align-items: flex-start;
-    flex-direction: column;
+@media (max-width: 520px) {
+  .catalogo {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
   }
 
-  .details {
-    margin: 15px;
+  .receita-card img {
+    height: 125px;
+  }
+
+  .card-info {
+    padding: 11px;
+  }
+
+  .card-info h2 {
+    font-size: 1rem;
+  }
+
+  .modal-conteudo {
     padding: 18px;
-  }
-
-  .contadores {
-    gap: 8px;
   }
 }

@@ -1,56 +1,49 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#fff1f5">
   <title>Doce Encanto | Receitas</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="topo">
-    <a class="logo" href="#">🍓 Doce Encanto</a>
-    <p>Receitas para todos os momentos!</p>
+    <div class="marca">🍓 Doce Encanto</div>
+    <p>Um mundo inteiro de sabores esperando por você!</p>
+    <div class="numeros">
+      <span><strong id="totalDoces">200</strong> receitas doces</span>
+      <span><strong id="totalSalgadas">200</strong> receitas salgadas</span>
+      <span><strong id="totalReceitas">400</strong> receitas no total</span>
+    </div>
   </header>
 
   <main>
-    <section class="hero">
-      <span class="hero-decor">🍰 ✨ 🍓</span>
-      <h1>Um mundo de sabores!</h1>
-      <p>Encontre sua próxima receita favorita.</p>
-      <div class="contadores">
-        <div><strong id="sweetCount">0</strong><span>Doces</span></div>
-        <div><strong id="savoryCount">0</strong><span>Salgadas</span></div>
+    <section class="controles">
+      <input id="pesquisa" type="search" placeholder="🔎 Procure uma receita..." aria-label="Pesquisar receitas">
+      <div class="filtros">
+        <button class="filtro ativo" data-tipo="todas">Todas</button>
+        <button class="filtro" data-tipo="doce">🍰 Doces</button>
+        <button class="filtro" data-tipo="salgada">🍕 Salgadas</button>
       </div>
+      <p id="contador" aria-live="polite">Mostrando 400 receitas</p>
     </section>
 
-    <section class="filtros">
-      <input id="searchInput" type="search"
-        placeholder="🔎 Pesquisar uma receita...">
-
-      <div class="botoes">
-        <button class="filter active" data-type="all">Todas</button>
-        <button class="filter" data-type="sweet">🍰 Doces</button>
-        <button class="filter" data-type="savory">🍕 Salgadas</button>
-      </div>
-    </section>
-
-    <div class="resultado">
-      <h2 id="sectionTitle">Todas as receitas</h2>
-      <span id="resultCount">Carregando receitas...</span>
-    </div>
-
-    <section id="recipeList" class="receitas">
-      <div class="loading">Preparando o nosso livro de receitas... 🍳</div>
-    </section>
-
-    <section id="details" class="details" hidden></section>
+    <section id="catalogo" class="catalogo"></section>
+    <p id="mensagemVazia" class="vazio" hidden>Nenhuma receita encontrada. Tente outra pesquisa. 💗</p>
   </main>
 
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-conteudo">
+      <button id="fecharModal" class="fechar" aria-label="Fechar">×</button>
+      <div id="detalhes"></div>
+    </div>
+  </div>
+
   <footer>
-    <h2>🍓 Doce Encanto</h2>
-    <p>Feito com carinho e muitas receitas!</p>
+    Feito com carinho e uma pitadinha de açúcar 💗
   </footer>
 
   <script src="script.js"></script>
